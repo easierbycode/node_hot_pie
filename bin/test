@@ -1,2 +1,2 @@
 #!/bin/bash
-./node_modules/mocha/bin/mocha test/_helper.js test/apps/authentication_test.coffee
+./node_modules/mocha/bin/mocha test/_helper.js test/apps/authentication_test.coffee test/models/pie_test.coffee
