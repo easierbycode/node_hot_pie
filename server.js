@@ -5,7 +5,8 @@
 
 require('coffee-script');
 
-var express = require('express');
+var express = require('express')
+  , RedisStore = require('connect-redis')(express);
 
 var app = module.exports = express.createServer();
 
@@ -17,6 +18,11 @@ app.configure(function(){
   app.set('port', 3000);
   app.use(express.bodyParser());
   app.use(express.methodOverride());
+  app.use(express.cookieParser());
+  app.use(express.session({
+    secret:'foomonkeyshizzledizzlenizzle',
+    store: new RedisStore()
+  }));
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
@@ -33,6 +39,9 @@ app.configure('test', function(){
 app.configure('production', function(){
   app.use(express.errorHandler());
 });
+
+// Helpers
+require('./apps/helpers')(app);
 
 // Routes
 
