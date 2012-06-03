@@ -6,6 +6,12 @@ class Pie
     @setDefaults()
     @
 
+  @all: ->
+    pies = []
+    for pie in []  # resque query goes here
+      pie = new Pie {json} for id, json in pie
+      pies.push pie
+
   setDefaults: ->
     unless @state
       @state = 'inactive'
